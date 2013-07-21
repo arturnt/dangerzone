@@ -3,7 +3,7 @@
 
 	var todos;
 
-	localStorage.clear();
+	// localStorage.clear();
 
 	if ( localStorage['todos'] )
 		todos = JSON.parse(localStorage['todos']);
@@ -31,11 +31,8 @@
 		}
 	}
 
+	// Parse in localStorage data
 	for (var i = 0; i < todos.length; i++) {
-		// console.log("id: " + todos[i]['id']);
-		// console.log("text: " + todos[i]['text']);
-		// console.log("checked: " + todos[i]['checked']);
-
 		newItem(todos[i]['id'], todos[i]['text'], todos[i]['checked']);
 
 		if ( todos[i]['checked'] ) {
@@ -89,8 +86,6 @@
 		$("#progress").html("" + completed + " / " + total + " completed! Yay!");
 	}
 
-	// Parse in localStorage data
-	
 	function addNewItem(text) {
 		//var id = _.uniqueId()
 		var date = new Date();
