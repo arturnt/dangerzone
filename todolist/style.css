@@ -1,0 +1,34 @@
+ol {
+    list-style-type: none;
+	padding: 0;
+	margin: 0;
+	width: 500;
+}
+
+li {
+	border: 1px solid #ccc; 
+	background: #eee; 
+	padding: 5px 10px; 
+	color: #000 
+}
+
+.checked {
+	text-decoration: line-through;
+	font-style: italic;
+	color: #888888;
+}
+
+
+/*ol .ui-selected {
+	background: #F39814; color: white;
+}*/
+
+/*if ( $listItem.css('textDecoration') === 'line-through' && $listItem.css('fontStyle', 'normal') && $listItem.css('color', '#888888') ) {
+			$listItem.css('textDecoration', 'none');
+			$listItem.css('fontStyle', 'normal');
+			$listItem.css('color', 'black');
+		} else {
+			$listItem.css('textDecoration', 'line-through');  // .css(attr, value);
+			$listItem.css('fontStyle', 'italic');
+			$listItem.css('color', '#888888');
+		}*/
