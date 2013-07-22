@@ -1,76 +1,55 @@
 (function() {
 	var ENTER = 13;
-
 	var todos;
 
-	// localStorage.clear();
-
+	// PARSE LOCALSTORAGE DATA
 	if ( localStorage['todos'] )
 		todos = JSON.parse(localStorage['todos']);
 	else
 		todos = [];
 
-	function indexOf(array, searchID) {
-		var index = -1;
-		for (var i = 0; i < array.length; i++) {
-			if ( array[i]["id"] === searchID ) {
-				index = i;
-				break;
-			}
-		}
-		return index;
-	}
-
-	function newItem(id, text, checked) {
-		if ( checked ) {
-			$("#todolist").append('<li align="center" id=' + id + '><label><input type="checkbox" class="checked" />   ' + text + '   <button class="close">&times;</button></label></li>');
-				console.log("checked, UGHHHHHHHHHH!!!!!!");
-		} else {
-			$("#todolist").append('<li align="center" id=' + id + '><label><input type="checkbox" />   ' + text + '   <button class="close">&times;</button></label></li>');
-				console.log("unchecked, BAHHHHHHHHHHH!!!!");
-		}
-	}
-
-	// Parse in localStorage data
 	for (var i = 0; i < todos.length; i++) {
-		newItem(todos[i]['id'], todos[i]['text'], todos[i]['checked']);
+		newItem(todos[i]['index'], todos[i]['text'], todos[i]['checked']);
+	}
 
-		if ( todos[i]['checked'] ) {
-			console.log(i + " true");
-			todos[i]['text'].className = true;
-		} else {
-			console.log(i + " false");
-			todos[i]['text'].className = false;
-		}
+	function newItem(index, text, checked) {
+		var task = { index: index, text: text };
+		var source = $("#template").html();
+		var template = Handlebars.compile(source);
+		var html = template(task);
 
-		//updateProgress();
+		$("#todolist").append(html);
+	
+		if ( checked ) {
+			$("li[data-index=" + index + "]").addClass('checked');
+			$("input[name=cb_" + index + "]").attr('checked', 'checked');
+		} 
 	}
 
 	function checkItem() {
 		var listItem = $(this).parent().parent();
-		var id = listItem.attr("id");
-		var index = indexOf(todos, id);
-			console.log("checkedbox: " + index);
+		var index = listItem.data("index");
 
-		if ( $(this).is(':checked') ) {
-			console.log("checked!");
-			todos[index]['checked'] = true;
-		} else {
-			console.log("not checked!");
-			todos[index]['checked'] = false;
-		}
-		
 		listItem.toggleClass('checked');
+
+		if ( $(this).is(':checked') )
+			todos[index]['checked'] = true;
+		else
+			todos[index]['checked'] = false;
+
 		updateProgress();
 	}
 
 	function removeItem() {
 		var listItem = $(this).parent().parent();
-		var id = listItem.attr("id");
-		var index = indexOf(todos, id);
-			console.log("removeitem index: " + index);
+		var index = listItem.data("index");
 		
-		todos.splice(index, 1);
+		for (var i = index + 1; i < todos.length; i++) {
+				$("li[data-index=" + i + "]").attr('data-index', "" + i-1);
+				todos[i]['index'] = i-1;
+		}
+		
+		todos.splice($.inArray(todos[index], todos), 1);	
 		
 		listItem.remove(); // take .close & select parent => li
 		updateProgress();
@@ -81,19 +60,14 @@
 		var total = $("input:checkbox").length;
 
 		localStorage.setItem('todos', JSON.stringify(todos));
-			console.log(JSON.parse(localStorage['todos']));
 
 		$("#progress").html("" + completed + " / " + total + " completed! Yay!");
 	}
 
 	function addNewItem(text) {
-		//var id = _.uniqueId()
-		var date = new Date();
-		var id = "" + date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds();
-			console.log("UNIQUEID: " + id);
-
-		newItem(id, text, false);
-		todos.push( {id: id, text: text, checked: false} );
+		var index = todos.length;
+		newItem(index, text, false);
+		todos.push( {index: index, text: text, checked: false} );
 		
 		$("#inputBox").val("");
 		$("#inputBox").focus();
@@ -118,7 +92,8 @@
 		
 		$(document).on('click', '.close', removeItem);
 		$(document).on('click', 'input[type=checkbox]', checkItem);  // .on(event, selector, function);  Every time click on doc, check .done & perform finishItem
-
+		
+		//$("#todolist").sortable();  // ???
 		updateProgress();
 	});
 }());

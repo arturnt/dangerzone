@@ -7,12 +7,37 @@
 		<!-- Bootstrap -->
     	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     	<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css'/>
+	</head>
 
-    	<!-- JQuery -->
-    	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<body>
+		<h1 align="center">To-Do List</h1>
+		
+		</br>
+		<div align="center"><input type="text" id="inputBox" /><button id="add">Add</button></div>
+		</br>
+		
+		<ol align="center" id="todolist">
+			<script id="template" type="text/x-handlebars-template"> 				
+				<li align="center" data-index={{index}}>
+					<label>
+						<input name="cb_{{index}}" type="checkbox" />  
+							{{text}}
+						<button class="close">&times;</button>
+					</label>
+				</li> 
+			</script>
+		</ol>
+
+		</br>
+		<div align="center">
+			<p><strong>Progress: </strong><span id="progress"></span></p>
+		</div>
+
+		<!-- JQuery -->
+    	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 		<!-- JQuery UI -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
  		
     	<!-- Underscore -->
     	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
@@ -28,28 +53,5 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script src="http://code.jquery.com/jquery.js"></script>
     	<script src="js/bootstrap.min.js"></script>
-	</head>
-
-	<body>
-		<h1 align="center">To-Do List</h1>
-		
-		</br>
-		<div align="center"><input type="text" id="inputBox" /><button id="add">Add</button></div>
-		</br>
-		
-		<ol align="center" id="todolist">
-			<!-- <li>
-					<label>
-						<input type="checkbox" class="done" />   
-							Take over the world   
-						<button class="close">&times;</button>
-					</label>
-				</li> -->
-		</ol>
-
-		</br>
-		<div align="center">
-			<p><strong>Progress: </strong><span id="progress"></span></p>
-		</div>
 	</body>
 </html>
