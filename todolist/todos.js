@@ -43,7 +43,7 @@
 	function removeItem() {
 		var listItem = $(this).parent().parent();
 		var index = listItem.data("index");
-		
+
 		for (var i = index + 1; i < todos.length; i++) {
 				$("li[data-index=" + i + "]").attr('data-index', "" + i-1);
 				todos[i]['index'] = i-1;
@@ -93,7 +93,7 @@
 		$(document).on('click', '.close', removeItem);
 		$(document).on('click', 'input[type=checkbox]', checkItem);  // .on(event, selector, function);  Every time click on doc, check .done & perform finishItem
 		
-		//$("#todolist").sortable();  // ???
+		// $("#todolist").sortable();  // ???
 		updateProgress();
 	});
 }());
