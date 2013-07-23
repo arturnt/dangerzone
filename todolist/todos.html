@@ -17,9 +17,11 @@
 
 		</br></br>
 		
+		<!-- Using align is discouraged, use CSS to center, bootstrap has text-center  class for text only :)  -->
 		<ol align="center" id="todolist">
 			<script id="template" type="text/x-handlebars-template"> 				
-				<div class="alert alert-info">
+				<div class="alert alert-info"> 
+					<!-- NOTE: This is invalid markup, OL can only have LIs. why the alert? -->
 					<li align="center" data-index={{index}}>
 						<label>
 							<input name="cb_{{index}}" type="checkbox" />  
@@ -31,7 +33,11 @@
 			</script>
 		</ol>
 
-		</br><div align="center">
+		</br> 
+		<!-- NOTE: Don't use BRs unless it's synmantecally correct. In CSS, apply margin for positioning.
+		 i.e. #todolist { margin: 10px }-->
+		
+		<div align="center">
 			<p><strong>Progress: </strong><span id="progress"></span></p>
 		</div>
 
@@ -43,10 +49,12 @@
  		
     	<!-- Underscore -->
     	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    	<!-- NOTE: Why included twice? Should only include jquery once.-->
     	<script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 
 		<!-- Handlebars -->
     	<script src="handlebars.js"></script>
+    	<!-- Per standard, move all libraries into lib folder. so then you have /lib/handlebars.js and lib/underscore.js -->
 		
 		<!-- My Script -->
 		<script src="todos.js"></script>
