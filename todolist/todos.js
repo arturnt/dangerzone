@@ -51,7 +51,7 @@
 		
 		todos.splice($.inArray(todos[index], todos), 1);	
 		
-		listItem.remove(); // take .close & select parent => li
+		listItem.parent().remove(); // take .close & select parent => li
 		updateProgress();
 	}
 

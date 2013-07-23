@@ -13,24 +13,25 @@
 		<h1 align="center">To-Do List</h1>
 		
 		</br>
-		<div align="center"><input type="text" id="inputBox" />     <button id="add">Add</button></div>
-		</br>
+		<div align="center"><input type="text" id="inputBox" />     <button class="btn" id="add">Add</button></div>
+
+		</br></br>
 		
-		<div>
 		<ol align="center" id="todolist">
 			<script id="template" type="text/x-handlebars-template"> 				
-				<li align="center" data-index={{index}}>
-					<label>
-						<input name="cb_{{index}}" type="checkbox" />  
-							{{text}}
-						<button class="close">&times;</button>
-					</label>
-				</li> 
+				<div class="alert alert-info">
+					<li align="center" data-index={{index}}>
+						<label>
+							<input name="cb_{{index}}" type="checkbox" />  
+								<strong>{{text}}</strong>
+							<button class="close">&times;</button>
+						</label>
+					</li>
+				</div> 
 			</script>
 		</ol>
 
-		</br>
-		<div align="center">
+		</br><div align="center">
 			<p><strong>Progress: </strong><span id="progress"></span></p>
 		</div>
 
